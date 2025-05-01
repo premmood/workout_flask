@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block head%}
+  {{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='extended_beauty.css')}}">
+{% endblock %}
+
+{% block content %}
+
+{% if workout %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form action="{{url_for('main.update_workout', workout_id = workout.id)}}" method="post">
+            <h1>Add new workout</h1>
+            <div class="form-group">
+        <label for="pushups">Push ups</label>
+        <input type="number" id="pushups" name="pushups" class="form-control" placeholder="no. of pushups" value="{{workout.pushup}}">
+    </div>
+
+            <div class="form-group">
+        <label for="comment">Comment</label>
+        <input id="comment" type="text" name="comment" class="form-control" placeholder="comments" value="{{workout.comment}}"></input>
+    </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Add workout</button>
+        </form>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

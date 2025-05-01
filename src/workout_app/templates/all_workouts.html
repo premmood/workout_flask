@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{super()}}
+  <link rel="stylesheet" href="{{ url_for('static', filename='extended_beauty.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table class="table table-hover">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th style="width:250px;">No. of Pushups</th>
+                        <th style="width:250px;">Date performed</th>
+                        <th style="width:250px;">Comment</th>
+                        <th style="width:250px;">Edit</th>
+                        <th style="width:250px;">Delete</th>
+
+                    </tr>
+                </thead>
+        <tbody>
+            {% for workout in workouts.items %}
+                <tr>
+                    <td> {{workout.pushup}} </td>
+                    <td> {{workout.date.strftime('%m/%d/%y')}} </td>
+                    <td> {{workout.comment}} </td>
+                    <td>
+                        <a role="button" class="btn btn-primary" href="/workout/{{workout.id}}/update">Edit</a>
+                    </td>
+                    <td>
+                        <a role="button" class="btn btn-danger" href="{{ url_for('main.delete', workoutid=workout.id) }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tr></tr>
+    </table>
+{% for iter_page in workouts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+    {% if iter_page %}
+        {% if iter_page == workouts.page %}
+            <a class="btn btn-info mb-4" href="{{ url_for('main.all_workout', page=workouts.page) }}">{{ iter_page }}</a>
+        {% else %}
+            <a class="btn btn-outline-info mb-4" href="{{ url_for('main.all_workout', page=iter_page) }}">{{ iter_page }}</a>
+        {% endif %}
+    {% else %}
+        <span class="btn btn-light mb-4">...</span>
+    {% endif %}
+{% endfor %}
+
+        </div>
+        <div class="col-md-2"></div>
+
+    </div>
+</div>
+
+{% endblock %}

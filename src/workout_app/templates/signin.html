@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='extended_beauty.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <form method="post" action="{{url_for('auth.signin')}}">
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+  </div>
+  <div class="form-check mt-3">
+    <input type="checkbox" class="form-check-input" id="remember" name="remember">
+    <label class="form-check-label" for="remember">Remember me</label>
+  </div>
+  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
+    </div>
+    <div class="col-md-6"></div>
+  </div>
+</div>
+{% endblock %}

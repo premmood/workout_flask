@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='extended_beauty.css') }}">
+{% endblock %}
+
+{% block content%}
+      {% with messages = get_flashed_messages()%}
+      {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+            <li>{{message}}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+      {% endwith %}
+ <h1>Welcome, {{name}}</h1>
+{% endblock %}
